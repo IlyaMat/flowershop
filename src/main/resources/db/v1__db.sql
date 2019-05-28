@@ -1,0 +1,106 @@
+CREATE TABLE IF NOT EXISTS user(
+id INT AUTO_INCREMENT NOT NULL,
+username VARCHAR(255) NOT NULL,
+password VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+role SMALLINT DEFAULT 1,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS customer(
+id INT AUTO_INCREMENT NOT NULL,
+fullname VARCHAR(255),
+phone_number VARCHAR(25),
+balance DECIMAL(8,2),
+discount INT,
+address VARCHAR(255),
+user_id INT,
+PRIMARY KEY (id),
+CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+CREATE TABLE IF NOT EXISTS _order(
+id INT AUTO_INCREMENT NOT NULL,
+customer_id INT NOT NULL,
+total_price DECIMAL (8,2) NOT NULL,
+status SMALLINT DEFAULT 0,
+created_at TIMESTAMP NOT NULL,
+closed_at TIMESTAMP,
+PRIMARY KEY (id),
+CONSTRAINT  fk_customer_id FOREIGN KEY (customer_id) REFERENCES customer (id)
+);
+
+
+CREATE TABLE IF NOT EXISTS product(
+id INT AUTO_INCREMENT NOT NULL,
+name VARCHAR(255) NOT NULL,
+price DECIMAL(6,2) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS  _order_product(
+id INT AUTO_INCREMENT NOT NULL,
+order_id INT NOT NULL,
+product_id INT NOT NULL,
+quantity INT NOT NULL,
+PRIMARY KEY (id),
+CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES _order (id),
+CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (id)
+);
+
+CREATE TABLE IF NOT EXISTS stock(
+id INT AUTO_INCREMENT NOT NULL,
+product_id INT NOT NULL,
+quantity INT,
+PRIMARY KEY(id),
+CONSTRAINT fkstock_product_id FOREIGN KEY (product_id) REFERENCES product (id)
+);
+
+INSERT INTO user (USERNAME ,PASSWORD ,EMAIL ,ROLE )
+VALUES ('admin', 'admin123', 'admin@email.com', 0);
+
+INSERT INTO user (USERNAME ,PASSWORD ,EMAIL ,ROLE )
+VALUES ('kristi', 'pass', 'krist123@email.com', 1);
+INSERT INTO user (USERNAME ,PASSWORD ,EMAIL ,ROLE )
+VALUES ('smith0', 'qwerty', 'sm098@email.com', 1);
+
+INSERT INTO
+customer(FULLNAME ,PHONE_NUMBER ,BALANCE ,DISCOUNT ,ADDRESS ,USER_ID ,)
+VALUES ('Golubeva Kristina Andreevna', '89103459900',7000, 5,'Russia, Tver, Fadeev st. 30',2 );
+INSERT INTO
+customer(FULLNAME ,PHONE_NUMBER ,BALANCE ,DISCOUNT ,ADDRESS ,USER_ID ,)
+VALUES ('Semenov Alexey Viktorovich', '89003332424', 3000, 5,'Russia, Tver, Dm.Donskoy st. 10',3 );
+
+INSERT INTO product (NAME ,PRICE)
+VALUES('Роза белая', 100);
+INSERT INTO product (NAME ,PRICE)
+VALUES('Роза черная', 120);
+INSERT INTO product (NAME ,PRICE )
+VALUES('Роза красная', 100);
+INSERT INTO product (NAME ,PRICE)
+VALUES('Ромашка', 20);
+INSERT INTO product (NAME ,PRICE )
+VALUES('Лилия розовая', 60);
+INSERT INTO product (NAME ,PRICE)
+VALUES('Орхидея', 70);
+INSERT INTO product (NAME ,PRICE )
+VALUES('Тюльпан', 40);
+INSERT INTO product (NAME ,PRICE)
+VALUES('Астра', 40);
+
+
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (1, 60);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (2, 40);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (3, 60);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (4, 70);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (5, 30);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (6, 25);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (7, 40);
+INSERT INTO stock(PRODUCT_ID ,QUANTITY ) VALUES (8, 30);
+
+
+
+
+
+
+
