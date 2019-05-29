@@ -2,6 +2,7 @@ package com.accenture.flowershop.be.business.order;
 
 import com.accenture.flowershop.be.access.order.OrderDAO;
 import com.accenture.flowershop.be.business.customer.CustomerBusinessService;
+import com.accenture.flowershop.be.business.stock.StockBusinessService;
 import com.accenture.flowershop.be.entity.customer.Customer;
 import com.accenture.flowershop.be.entity.order.Order;
 import com.accenture.flowershop.be.entity.orderproduct.OrderProduct;
@@ -25,6 +26,8 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
     private OrderDAO orderDAO;
     @Autowired
     private CustomerBusinessService customerBusinessService;
+    @Autowired
+    private StockBusinessService stockBusinessService;
 
     @Override
     @Transactional
@@ -74,6 +77,10 @@ public class OrderBusinessServiceImpl implements OrderBusinessService {
         order.setStatus(OrderStatus.ОПЛАЧЕН);
         addOrder(order);
         //+изменим кол-во продуктов в наличии
+        List<OrderProduct> orderProducts = order.getOrderProducts();
+        for (OrderProduct orderProduct : orderProducts) {
+            stockBusinessService.changeQuantityProduct(orderProduct.getProduct(),orderProduct.getQuantity() );
+        }
         return order;
 
     }

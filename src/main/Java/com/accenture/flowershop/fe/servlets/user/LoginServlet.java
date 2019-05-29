@@ -55,6 +55,8 @@ public class LoginServlet extends HttpServlet {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Такой пользователь не найден!');");
             out.println("</script>");
+            out.close();
+            resp.sendRedirect("/login");
 
         } else {
             //customerDTO
@@ -75,7 +77,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("user", userDTO);
 
-           // jmsService.sendMessageJMS("hello");
+           // jmsService.sendMessageJMS("heffg");
 
             //перенаправляем
             resp.sendRedirect("/products");
@@ -83,7 +85,7 @@ public class LoginServlet extends HttpServlet {
         }
 
     }
-;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);

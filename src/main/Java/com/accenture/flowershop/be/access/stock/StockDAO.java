@@ -1,5 +1,6 @@
 package com.accenture.flowershop.be.access.stock;
 
+import com.accenture.flowershop.be.entity.product.Product;
 import com.accenture.flowershop.be.entity.stock.Stock;
 
 import java.util.List;
@@ -10,4 +11,8 @@ public interface StockDAO {
 
     //Сохраняет/добавляет склад
     void addStock(Stock stock);
+
+    Stock findStockByProduct(Product product);
+
+
 }

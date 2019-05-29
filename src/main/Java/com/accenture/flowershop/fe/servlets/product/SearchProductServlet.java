@@ -47,22 +47,23 @@ public class SearchProductServlet extends HttpServlet {
 
         for (Product product : products) {
             //stock
-            /*Stock stock = product.getStock();
+            Stock stock = product.getStock();
             StockDTO stockDTO = new StockDTO();
-            stockDTO.setQuantity(stock.getQuantity());*/
+            stockDTO.setQuantity(stock.getQuantity());
 
             if (name != null & minPrice == null && maxPrice == null) {
                 String encName = new String(name.getBytes("ISO-8859-1"), "utf-8");//по русски
-                // if (maxPrice != null & minPrice != null) {
+
                 if (product.getName().contains(encName)) {
                     ProductDTO productDTO = new ProductDTO();
                     productDTO.setId(product.getId());
                     productDTO.setName(product.getName());
                     productDTO.setPrice(product.getPrice());
                     //stock
-                    //stockDTO.setProductDTO(productDTO);
+                    stockDTO.setProductDTO(productDTO);
                     //
-                   // productDTO.setStock(stockDTO);
+                    productDTO.setStock(stockDTO);
+
                     productDTOS.add(productDTO);
                 }
             } else if (minPrice != null && maxPrice != null) {
@@ -73,9 +74,9 @@ public class SearchProductServlet extends HttpServlet {
                     productDTO.setName(product.getName());
                     productDTO.setPrice(product.getPrice());
                     //stock
-                   // stockDTO.setProductDTO(productDTO);
+                    stockDTO.setProductDTO(productDTO);
                     //
-                   // productDTO.setStock(stockDTO);
+                    productDTO.setStock(stockDTO);
                     productDTOS.add(productDTO);
                 }
             } else {
@@ -84,13 +85,9 @@ public class SearchProductServlet extends HttpServlet {
                 productDTO.setName(product.getName());
                 productDTO.setPrice(product.getPrice());
                 //stock
-               // Stock stock = product.getStock();
-               // StockDTO stockDTO = new StockDTO();
-               // stockDTO.setId(product.getStock().getId());
-               // stockDTO.setQuantity(product.getStock().getQuantity());
-               // stockDTO.setProductDTO(productDTO);
+                stockDTO.setProductDTO(productDTO);
                 //
-               // productDTO.setStock(stockDTO);
+                productDTO.setStock(stockDTO);
                 productDTOS.add(productDTO);
             }
         }

@@ -1,8 +1,5 @@
 package com.accenture.flowershop.fe.servlets.user;
 
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +17,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if(session != null){
             session.invalidate();
-            resp.sendRedirect("/login");
+            resp.sendRedirect("/");
         }
     }
 

@@ -107,7 +107,9 @@
       <div style="border:2px solid black" class="col-md-4 col-sm-4 grid-item">
         <img src="https://best-coll.ru/pictures/product/middle/7028_middle.jpg" alt="" />
         <h1 class="product-title">${product.name}</h1>
-        <h3 class="product-price">${product.price}</h3>
+        <h3 class="product-price">${product.price}р</h3>
+        <h3 class="product-quantity">Осталось:${product.stock.quantity} шт.</h3>
+
 
         <c:if test="${sessionScope.user != null}">
 
